@@ -7,15 +7,12 @@ import java.util.ArrayList;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+@SuppressWarnings("unchecked")
 public class Main {
     public static void main(String[] args) {
-        ArrayList<String> myArr = new ArrayList<>();
-        myArr.add("Kareem");
-        myArr.add("Mohamed");
-        myArr.add("Shaban");
+        String[] myArr = new String[]{"Kareem", "Mohamed", "Shaban"};
         ArrayInterface<String> array = new StaticArray<>(myArr);
-        ArrayList<ArrayInterface<String>> params = new ArrayList<>();
-        params.add(array);
+        ArrayInterface<String>[] params = (ArrayInterface<String>[]) new ArrayInterface[]{array};
         ArrayInterface<ArrayInterface<String>> array2 = new StaticArray<>(params);
 
         System.out.println(array);

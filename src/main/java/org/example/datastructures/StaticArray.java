@@ -2,14 +2,12 @@ package org.example.datastructures;
 
 import org.example.datastructures.interfaces.ArrayInterface;
 
-import java.util.ArrayList;
-
 public class StaticArray<T> implements ArrayInterface<T> {
 
-    protected ArrayList<T> array;
+    protected T[] array;
     protected int size;
 
-    public StaticArray(ArrayList<T> nodes) {
+    public StaticArray(T[] nodes) {
         construct(nodes);
     }
 
@@ -17,10 +15,10 @@ public class StaticArray<T> implements ArrayInterface<T> {
      * O(1)
      */
     @Override
-    public boolean construct(ArrayList<T> nodes) {
+    public boolean construct(T[] nodes) {
         try {
             array = nodes;
-            size = array.size();
+            size = array.length;
             return true;
         } catch (Exception e) {
             return false;
@@ -40,7 +38,7 @@ public class StaticArray<T> implements ArrayInterface<T> {
      */
     @Override
     public T getElementAt(int offset) {
-        return array.get(offset);
+        return array[offset];
     }
 
     /**
