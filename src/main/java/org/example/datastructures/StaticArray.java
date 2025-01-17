@@ -3,6 +3,7 @@ package org.example.datastructures;
 import org.example.datastructures.interfaces.ArrayInterface;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class StaticArray<T> implements ArrayInterface<T> {
 
@@ -59,5 +60,22 @@ public class StaticArray<T> implements ArrayInterface<T> {
         }
         string.append(" }\n");
         return string.toString();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public T next() {
+                return array.get(index++);
+            }
+        };
     }
 }

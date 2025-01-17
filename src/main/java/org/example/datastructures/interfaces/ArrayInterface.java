@@ -2,7 +2,7 @@ package org.example.datastructures.interfaces;
 
 import java.util.ArrayList;
 
-public interface ArrayInterface<T> {
+public interface ArrayInterface<T> extends Iterable<T> {
 
     public boolean construct(ArrayList<T> nodes);
 
