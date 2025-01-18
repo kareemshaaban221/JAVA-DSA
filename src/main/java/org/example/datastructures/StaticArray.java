@@ -1,64 +1,61 @@
 package org.example.datastructures;
 
-import org.example.datastructures.interfaces.ArrayInterface;
+import org.example.datastructures.abstracts.arrays.Array;
+import org.example.datastructures.abstracts.arrays.ArrayInterface;
 
 import java.util.Iterator;
 
-public class StaticArray<T> implements ArrayInterface<T> {
+@SuppressWarnings("unchecked")
+public class StaticArray<T> extends Array<T> implements ArrayInterface<T> {
 
     protected T[] array;
     protected int size;
 
+    public StaticArray(int size) {
+        array = (T[]) new Object[size];
+        this.size = size;
+    }
+
     public StaticArray(T[] nodes) {
-        construct(nodes);
+        array = nodes;
+        size = array.length;
     }
 
-    /**
-     * O(1)
-     */
-    @Override
-    public boolean construct(T[] nodes) {
-        try {
-            array = nodes;
-            size = array.length;
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    /**
-     * O(1)
-     */
+    // O(1)
     @Override
     public int size() {
         return size;
     }
 
-    /**
-     * O(1)
-     */
+    // O(1)
     @Override
-    public T getElementAt(int offset) {
-        return array[offset];
+    public T get(int index) {
+        if (index >= size) { throw new IndexOutOfBoundsException("Array size: " + size); }
+        return array[index];
     }
 
-    /**
-     * O(1)
-     */
+    // O(1)
+    @Override
+    public boolean set(int index, T value) {
+        try {
+            array[index] = value;
+            return true;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    // O(1)
+    @Override
+    public T remove(int index) {
+        T value = get(index);
+        return set(index, null) ? value : null;
+    }
+
+    // O(1)
     @Override
     public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder string = new StringBuilder("StaticArray[" + size + "]: {");
-        for (T item : array) {
-            string.append(" ").append(item).append(",");
-        }
-        string.append(" }\n");
-        return string.toString();
+        return size <= 0;
     }
 
     @Override
