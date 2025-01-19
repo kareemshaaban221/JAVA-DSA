@@ -10,4 +10,8 @@ public interface ArrayInterface<T> extends Countable, Iterable<T> {
 
     public T remove(int index);
 
+    public int indexOf(T value);
+
+    public boolean contains(T value);
+
 }

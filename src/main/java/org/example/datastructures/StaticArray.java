@@ -30,7 +30,7 @@ public class StaticArray<T> extends Array<T> implements ArrayInterface<T> {
     // O(1)
     @Override
     public T get(int index) {
-        if (index >= size) { throw new IndexOutOfBoundsException("Array size: " + size); }
+        if (index >= size || index < 0) { throw new IndexOutOfBoundsException("Array size: " + size); }
         return array[index];
     }
 
@@ -50,6 +50,21 @@ public class StaticArray<T> extends Array<T> implements ArrayInterface<T> {
     public T remove(int index) {
         T value = get(index);
         return set(index, null) ? value : null;
+    }
+
+    // O(n)
+    @Override
+    public int indexOf(T value) {
+        for (int i = 0; i < size; i++) {
+            if (array[i].equals(value)) { return i; }
+        }
+        return -1;
+    }
+
+    // O(n)
+    @Override
+    public boolean contains(T value) {
+        return indexOf(value) != -1;
     }
 
     // O(1)

@@ -51,6 +51,18 @@ public class DynamicArray<T> extends Array<T> implements VectorInterface<T> {
         return array.remove(index);
     }
 
+    // O(n)
+    @Override
+    public int indexOf(T value) {
+        return array.indexOf(value);
+    }
+
+    // O(n)
+    @Override
+    public boolean contains(T value) {
+        return array.contains(value);
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -150,6 +162,14 @@ public class DynamicArray<T> extends Array<T> implements VectorInterface<T> {
     @Override
     public int capacity() {
         return capacity;
+    }
+
+    // O(n)
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            array.set(i, null);
+        }
+        size = 0;
     }
 
     // O(n)
