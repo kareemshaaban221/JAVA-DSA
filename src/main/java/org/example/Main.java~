@@ -79,13 +79,5 @@ public class Main {
         VectorInterface<String> vec2 = new DynamicArray<>(new String[]{list2.dequeue(), list2.dequeue(), list2.dequeue()});
         System.out.println(vec2);
         System.out.println(list2);
-
-        ListInterface<String> list3 = new DoublyLinkedList<>();
-        list3.enqueue("Kareem");
-        list3.enqueue("Mohamed");
-        list3.enqueue("Shaban");
-        System.out.println(list3);
-        list3.reverse();
-        System.out.println(list3);
     }
 }
