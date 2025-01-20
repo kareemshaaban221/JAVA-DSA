@@ -98,12 +98,12 @@ public class DoublyLinkedList<T> extends AbstractDoublyLinkedList<T> {
     public boolean enqueue(T value) {
         Node<T> node = new Node<T>(value, null, null);
         if (null == tail) {
-            head = tail = node;
+            head = node;
         } else {
             tail.next = node;
             node.prev = tail;
-            tail = node;
         }
+        tail = node;
         size++;
         return true;
     }
@@ -111,10 +111,11 @@ public class DoublyLinkedList<T> extends AbstractDoublyLinkedList<T> {
     @Override
     public T dequeue() {
         if (null != head) {
-            T value = head.data;
+            Node<T> target = head;
             head = head.next;
+            tail = (head == null) ? null : tail;
             size--;
-            return value;
+            return target.data;
         }
         return null;
     }

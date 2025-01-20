@@ -2,12 +2,14 @@ package org.example;
 
 import org.example.datastructures.DoublyLinkedList;
 import org.example.datastructures.DynamicArray;
+import org.example.datastructures.Graph;
 import org.example.datastructures.StaticArray;
 import org.example.datastructures.abstracts.adts.ListInterface;
 import org.example.datastructures.abstracts.adts.QueueInterface;
 import org.example.datastructures.abstracts.adts.StackInterface;
 import org.example.datastructures.abstracts.arrays.ArrayInterface;
 import org.example.datastructures.abstracts.arrays.VectorInterface;
+import org.example.helpers.interfaces.Callback;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -17,6 +19,7 @@ public class Main {
         testStaticArray();
         testDynamicArray();
         testDoublyLinkedList();
+        testGraph();
     }
 
     public static void testStaticArray() {
@@ -79,5 +82,33 @@ public class Main {
         VectorInterface<String> vec2 = new DynamicArray<>(new String[]{list2.dequeue(), list2.dequeue(), list2.dequeue()});
         System.out.println(vec2);
         System.out.println(list2);
+
+        ListInterface<String> list3 = new DoublyLinkedList<>();
+        list3.enqueue("Kareem");
+        list3.enqueue("Mohamed");
+        list3.enqueue("Shaban");
+        System.out.println(list3);
+        list3.reverse();
+        System.out.println(list3);
+    }
+
+    public static void testGraph() {
+        System.out.println("::: ::: ::: Graph Tests ::: ::: :::");
+        VectorInterface<String> nodes = new DynamicArray<>(new String[]{"(A)", "(B)", "(C)", "(D)", "(E)"});
+        boolean[][] representation = new boolean[][]{
+                {false, true, false, true, false},
+                {true, false, true, false, false},
+                {false, true, false, false, false},
+                {true, true, false, false, true},
+                {false, false, false, true, false}};
+        Graph<String> graph = new Graph<>(representation, nodes);
+        Callback<String> callback = new Callback<>() {
+            @Override
+            public void run(String object, boolean newLevel) {
+                if (newLevel) { System.out.println("\n"); }
+                System.out.print("- " + object);
+            }
+        };
+        graph.traverse(callback);
     }
 }

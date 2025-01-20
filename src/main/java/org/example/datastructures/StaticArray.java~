@@ -56,7 +56,7 @@ public class StaticArray<T> extends Array<T> implements ArrayInterface<T> {
     @Override
     public int indexOf(T value) {
         for (int i = 0; i < size; i++) {
-            if (array[i] != null && array[i].equals(value)) { return i; }
+            if (array[i].equals(value)) { return i; }
         }
         return -1;
     }

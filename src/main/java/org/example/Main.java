@@ -2,12 +2,14 @@ package org.example;
 
 import org.example.datastructures.DoublyLinkedList;
 import org.example.datastructures.DynamicArray;
+import org.example.datastructures.Graph;
 import org.example.datastructures.StaticArray;
 import org.example.datastructures.abstracts.adts.ListInterface;
 import org.example.datastructures.abstracts.adts.QueueInterface;
 import org.example.datastructures.abstracts.adts.StackInterface;
 import org.example.datastructures.abstracts.arrays.ArrayInterface;
 import org.example.datastructures.abstracts.arrays.VectorInterface;
+import org.example.helpers.interfaces.Callback;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -17,6 +19,7 @@ public class Main {
         testStaticArray();
         testDynamicArray();
         testDoublyLinkedList();
+        testGraph();
     }
 
     public static void testStaticArray() {
@@ -87,5 +90,54 @@ public class Main {
         System.out.println(list3);
         list3.reverse();
         System.out.println(list3);
+    }
+
+    public static void testGraph() {
+        System.out.println("::: ::: ::: Graph Tests ::: ::: :::");
+        VectorInterface<String> nodes = new DynamicArray<>(new String[]{"(A)", "(B)", "(C)", "(D)", "(E)"});
+        boolean[][] representation = new boolean[][]{
+                {false, true, false, true, false},
+                {true, false, true, false, false},
+                {false, true, false, false, false},
+                {true, true, false, false, true},
+                {false, false, false, true, false}};
+        Graph<String> graph = new Graph<>(representation, nodes);
+        Callback<String> callback = new Callback<>() {
+            @Override
+            public void run(String object, boolean newLevel) {
+                if (newLevel) { System.out.println("\n"); }
+                System.out.print("- " + object);
+            }
+        };
+        graph.traverse(callback);
+        /**
+         * BFS (Queue-based Traversal) Output:
+         * - (A)
+         *
+         * - (B)- (D)
+         *
+         * - (C)
+         *
+         * - (E)
+         *
+         * DFS (Stack-based Traversal) Output:
+         * - (A)
+         *
+         * - (B)- (D)
+         *
+         * - (E)
+         *
+         * - (C)
+         *
+         * Explaination:
+         * The output above is the expected output for both BFS and DFS traversals.
+         * In both traversals the B node and the D node are printed first because they are direct neighbors of the A node.
+         * Note that the E node is neighbor of the D node, and the C node is neighbor of the B node.
+         * First Implementation (BFS):
+         * - Prints the C node first because it is the first inserted node in the queue because its parent (the B node) comes first
+         * Second Implementation (DFS):
+         * - Prints the E node first because it is the first inserted node in the stack because its parent (the D node) was pushed lastly,
+         *   So it will be printed first (FIFO).
+         */
     }
 }
